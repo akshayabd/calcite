@@ -137,8 +137,8 @@ buildCache {
         isAllowUntrustedServer = true
         isAllowInsecureProtocol = true
         credentials {
-            username = System.getenv("POC_CACHE_USERNAME")
-            password = System.getenv("POC_CACHE_PASSWORD")
+            username = System.getenv("GRADLE_ENTERPRISE_CACHE_USERNAME")
+            password = System.getenv("GRADLE_ENTERPRISE_CACHE_PASSWORD")
         }
     }
 }
