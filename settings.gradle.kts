@@ -131,7 +131,7 @@ buildCache {
         isEnabled = false
     }
     remote<HttpBuildCache> {
-        url = uri("http://ec2-3-230-118-11.compute-1.amazonaws.com/")
+        url = uri("http://ec2-3-230-118-11.compute-1.amazonaws.com/cache/")
         isPush = true
         isEnabled = true
         isAllowUntrustedServer = true
