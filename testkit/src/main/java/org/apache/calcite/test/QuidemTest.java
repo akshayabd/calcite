@@ -69,6 +69,8 @@ public abstract class QuidemTest {
 
   private static final Pattern PATTERN = Pattern.compile("\\.iq$");
 
+  private static final String SUREFIRE_TEST_DIR = System.getProperty("test.surefire.dir");
+
   private static Object getEnv(String varName) {
     switch (varName) {
     case "jdk18":
@@ -141,7 +143,7 @@ public abstract class QuidemTest {
       // inUrl = "file:/home/fred/calcite/core/target/test-classes/sql/outer.iq"
       final URL inUrl = QuidemTest.class.getResource("/" + n2u(path));
       inFile = Sources.of(inUrl).file();
-      outFile = new File(inFile.getAbsoluteFile().getParent(), u2n("surefire/") + path);
+      outFile = new File(SUREFIRE_TEST_DIR, path);
     }
     Util.discard(outFile.getParentFile().mkdirs());
     try (Reader reader = Util.reader(inFile);
