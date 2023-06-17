@@ -106,8 +106,8 @@ fun property(name: String) =
 val isCiServer = System.getenv().containsKey("CI")
 
 gradleEnterprise {
-    server = "https://ge.apache.org"
-    allowUntrustedServer = false
+    server = "http://ec2-3-230-118-11.compute-1.amazonaws.com"
+    allowUntrustedServer = true
 
     buildScan {
         capture { isTaskInputFiles = true }
@@ -128,7 +128,7 @@ gradleEnterprise {
 //  2. Otherwise the cache is read-only (e.g. everyday builds and PR builds)
 buildCache {
     local {
-        isEnabled = !isCiServer
+        isEnabled = false
     }
     if (property("s3.build.cache")?.ifBlank { "true" }?.toBoolean() == true) {
         val pushAllowed = property("s3.build.cache.push")?.ifBlank { "true" }?.toBoolean() ?: true
