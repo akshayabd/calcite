@@ -130,13 +130,15 @@ buildCache {
     local {
         isEnabled = false
     }
-    if (property("s3.build.cache")?.ifBlank { "true" }?.toBoolean() == true) {
-        val pushAllowed = property("s3.build.cache.push")?.ifBlank { "true" }?.toBoolean() ?: true
-        remote<com.github.burrunan.s3cache.AwsS3BuildCache> {
-            region = "us-east-2"
-            bucket = "calcite-gradle-cache"
-            endpoint = "s3.us-east-2.wasabisys.com"
-            isPush = isCiServer && pushAllowed && !awsAccessKeyId.isNullOrBlank()
+    remote<HttpBuildCache> {
+        url = uri("http://ec2-3-230-118-11.compute-1.amazonaws.com")
+        isPush = true
+        isEnabled = true
+        isAllowUntrustedServer = true
+        isAllowInsecureProtocol = true
+        credentials {
+            username = System.getenv("POC_CACHE_USERNAME")
+            password = System.getenv("POC_CACHE_PASSWORD")
         }
     }
 }
